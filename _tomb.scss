@@ -1,0 +1,290 @@
+/*
+ * File: c:\Users\Brian Leishman\go\src\github.com\BrianLeishman\tonsofdamage.gg\server\scss\tonsofmaterial-bootstrap\tomb.scss
+ * Project: c:\Users\Brian Leishman\go\src\github.com\BrianLeishman\tonsofdamage.gg\server\scss\tonsofmaterial-bootstrap
+ * Created Date: Tuesday April 24th 2018
+ * Author: Brian Leishman
+ * -----
+ * Last Modified: Sun Apr 29 2018
+ * Modified By: Brian Leishman
+ * -----
+ * Copyright (c) 2018 Stumpyinc, LLC
+ */
+
+// Google actually has official web components, so we'll
+// use a couple of those to save some effort
+@import "../@material/elevation/mdc-elevation";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+
+
+// global styles
+
+html,body {
+    font-family: Roboto, sans-serif;
+    font-size:16px;
+    font-weight:300;
+}
+
+
+//headers!
+
+h1{
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.3333;
+    margin-bottom: 24px;
+}
+
+
+// buttons!
+
+.btn+.btn{
+    margin-left:8px;
+}
+
+.btn {
+    min-width:88px;
+    height:36px;
+    text-transform:uppercase;
+    border-radius:2px;
+    padding-left:8px;
+    padding-right:8px;
+    padding-top: 4px;
+    border:none;
+    overflow:hidden;
+    position:relative;
+    font-size:14px;
+    font-weight: 400;
+
+    @each $color, $value in $theme-colors {
+        &.btn-#{$color}{
+            &:not(:disabled):not(.disabled){
+                &,&:focus,&.focus{
+                    @include mdc-elevation(2, #000, 0);
+                }
+
+                &:active,&.active{
+                    @include mdc-elevation(8, #000, 0);
+                }
+            }
+
+            &:focus,&.focus{
+                background-color:mix(#000, $value, 12%);
+            }
+        }
+    }
+
+    &:disabled,&.disabled{
+        color:rgba(255, 255, 255,.3);
+        background-color:rgba(255, 255, 255,.12);
+    }
+}
+
+.btn::before{
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    opacity:0;
+    box-shadow: 0px 0px 1px 20px #000;
+
+}
+
+.btn.ripple::before{
+    animation: btn-ripple .75s;
+    box-shadow: 0px 0px 1px 80px #000;
+
+    transition: box-shadow 1s;
+}
+
+@keyframes btn-ripple {
+    0%   { opacity: 0; }
+    50%   { opacity: .1; }
+    100% { opacity: 0; }
+}
+
+// cards!
+
+.card{
+    border-radius:2px;
+    @include mdc-elevation(2, #000, 0);
+}
+
+.card-body{
+    padding:0;
+    margin:24px 40px;
+}
+
+.card-footer {
+    margin:40px;
+    text-align:right;
+    border-top:none;
+}
+
+.card-header{
+    text-align:left;
+    border-bottom:none;
+}
+
+.card-header,.card-footer{
+    padding:0;
+    background-color:transparent;
+}
+
+
+// inputs!
+
+.form-group{
+    min-height:80px;
+    position:relative;
+    margin:0;
+    padding:0;
+
+    & .form-control, & label{
+        position:absolute;
+        top:32px;
+    }
+
+    & label{
+        transition: top .25s, font-size .25s;
+    }
+
+    &::before{
+        content: "";
+        width: 80%;
+        left: 10%;
+        position: absolute;
+        bottom: 22px;
+        z-index: 2;
+        pointer-events:none;
+    }
+
+    &.focus{
+        & label {
+            color:map-get($theme-colors,'primary');
+        }
+    }
+
+    &.focus,&.not-empty{
+        & label {
+            top:8px;
+            font-size:12px;
+        }
+    }
+
+    &[data-error]{
+        & label {
+            color: rgba($form-feedback-invalid-color, 1);
+        }
+
+        &::before{
+            border-bottom: 2px solid $form-feedback-invalid-color;
+            width: 100%;
+            left: 0;
+            transition: left .25s, width .25s;
+        }
+
+        &::after{
+            content: attr(data-error);
+            color: rgba($form-feedback-invalid-color, 1);
+            height:16px;
+            line-height:16px;
+            font-size:12px;
+            position:absolute;
+            bottom:4px;
+            font-weight:300;
+        }
+    }
+}
+
+.form-control,label{
+    height:16px;
+    line-height:16px;
+    font-weight:300;
+    font-size:16px;
+}
+
+.form-control{
+    outline:none;
+    border:none;
+    outline-offset:0;
+    border-radius:0;
+    box-sizing:content-box;
+    padding:0;
+    padding-bottom:8px;
+
+    &:not(:disabled):not(.disabled){
+        &,&:focus,&.focus{
+            border-bottom:1px solid rgba($body-color, .7);
+            color:rgba($body-color,1);
+        }
+    }
+
+    &,&:disabled,&.disabled{
+        &,&:focus,&.focus{
+            box-shadow:none;
+            background-color:transparent;
+        }
+    }
+
+    &:disabled,&.disabled{
+        color:rgba($body-color,.5);
+        border-bottom:1px dotted rgba($body-color,.7);
+    }
+
+}
+
+.tomb-form-control-border{
+    z-index:1;
+    position:absolute;
+    display:block;
+    pointer-events:none;
+    width:80%;
+    left:10%;
+
+    &.ripple{
+        border-bottom: 2px solid rgba(map-get($theme-colors,'primary'), 1);
+        width: 100%;
+        left: 0;
+        transition: left .25s, width .25s;
+    }
+}
+
+
+// sweet alerts!
+
+.swal2-popup.swal2-modal{
+    background-color:$card-bg;
+    border-radius:2px;
+    width: 24em;
+    @include mdc-elevation(24, #000, 0);
+
+    & .swal2-header{
+        text-align:left;
+        align-items: left;
+    }
+
+    & .swal2-content{
+        justify-content: left;
+        color:$body-color;
+    }
+
+    & #swal2-content{
+        text-align:left;
+    }
+
+    & .swal2-title{
+        color:$body-color;
+        font-weight:400;
+        text-align: left;
+    }
+
+    & .swal2-actions{
+        text-align:right;
+        align-items: right;
+        justify-content: right;
+        margin:32px 0 0 auto;
+    }
+}
