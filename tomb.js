@@ -4,7 +4,7 @@
  * Created Date: Saturday April 28th 2018
  * Author: Brian Leishman
  * -----
- * Last Modified: Tue May 01 2018
+ * Last Modified: Sat May 05 2018
  * Modified By: Brian Leishman
  * -----
  * Copyright (c) 2018 Stumpyinc, LLC
@@ -12,7 +12,7 @@
 
 window['Tombs'] = {};
 
-$(document).on('mousedown', '.btn', function (e) {
+$(document).on('mousedown', '.btn:not(.btn-link)', function (e) {
     var $this = $(this);
     var ID;
     if ($this.is('[data-tomb-id]')) {

@@ -4,7 +4,7 @@
  * Created Date: Tuesday April 24th 2018
  * Author: Brian Leishman
  * -----
- * Last Modified: Sun Apr 29 2018
+ * Last Modified: Sat May 05 2018
  * Modified By: Brian Leishman
  * -----
  * Copyright (c) 2018 Stumpyinc, LLC
@@ -70,6 +70,43 @@ h1{
             &:focus,&.focus{
                 background-color:mix(#000, $value, 12%);
             }
+        }
+
+        &.btn-link.text-#{$color}{
+            background-color:rgba($value,0);
+
+            &:not(:disabled):not(.disabled){
+                &:focus,&.focus, &:hover,&.hover{
+                    background-color:rgba($value,.12);
+                }
+
+                &:active,&.active{
+                    background-color:rgba($value,.18);
+                }
+            }
+
+            &:disabled,&.disabled{
+                color:rgba($value,.40)!important;
+            }
+        }
+    }
+
+    &.btn-link{
+        text-decoration:none;
+        background-color:rgba(map-get($theme-colors,'primary'),0);
+
+        &:not(:disabled):not(.disabled){
+            &:focus,&.focus, &:hover,&.hover{
+                background-color:rgba(map-get($theme-colors,'primary'),.12);
+            }
+
+            &:active,&.active{
+                background-color:rgba(map-get($theme-colors,'primary'),.18);
+            }
+        }
+
+        &:disabled,&.disabled{
+            color:rgba(map-get($theme-colors,'primary'),.40)!important;
         }
     }
 
